@@ -3,11 +3,11 @@ package galaxyraiders.core.physics
 data class Point2D(val x: Double, val y: Double) {
 
   operator fun plus(p: Point2D): Point2D {
-    return Point2D(p.x+this.x, p.y+this.y)
+    return Point2D(p.x + this.x, p.y + this.y)
   }
 
   operator fun plus(v: Vector2D): Point2D {
-    return Point2D(v.dx+this.x, v.dy+this.y)
+    return Point2D(v.dx + this.x, v.dy + this.y)
   }
 
   override fun toString(): String {
@@ -35,6 +35,6 @@ data class Point2D(val x: Double, val y: Double) {
   }
 
   fun distance(p: Point2D): Double {
-    return Vector2D(this.x-p.x,this.y-p.y).magnitude
+    return Vector2D(this.x - p.x, this.y - p.y).magnitude
   }
 }
