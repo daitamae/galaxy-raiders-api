@@ -54,10 +54,22 @@ class GameEngine(
     this.processPlayerInput()
     this.updateSpaceObjects()
     this.renderSpaceField()
+    this.updateExplosionCounts()
   }
 
   fun renderSpaceField() {
     this.visualizer.renderSpaceField(this.field)
+  }
+
+  fun updateExplosionCounts()
+  {
+    this.field.explosions.forEach {
+      it.updateExplosion()
+    }
+    list.removeIf { x: T -> predicate.test(x) }
+    
+    var predicate = Predicate { it: it.is_triggered}
+    remove(this.field.explosions,predicate)
   }
 
   fun processPlayerInput() {
@@ -90,6 +102,11 @@ class GameEngine(
     this.field.spaceObjects.forEachPair {
         (first, second) ->
       if (first.impacts(second)) {
+        if (first.type == "Missile" && second.type == "Asteroid" ||
+          first.type == "Asteroid" && second.type == "Missile"
+        ) {
+          this.field.generateExplosion(first.center)
+        }
         first.collideWith(second, GameEngineConfig.coefficientRestitution)
       }
     }

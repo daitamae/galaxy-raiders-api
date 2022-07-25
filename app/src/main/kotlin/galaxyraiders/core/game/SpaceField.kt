@@ -23,6 +23,8 @@ object SpaceFieldConfig {
   val asteroidMinMass = config.get<Int>("ASTEROID_MIN_MASS")
   val asteroidMaxMass = config.get<Int>("ASTEROID_MAX_MASS")
   val asteroidMassMultiplier = config.get<Double>("ASTEROID_MASS_MULTIPLIER")
+
+  val explosionLifespan = config.get<Int>("EXPLOSION_LIFESPAN")
 }
 
 @Suppress("TooManyFunctions")
@@ -33,6 +35,9 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
     private set
 
   var missiles: List<Missile> = emptyList()
+    private set
+
+  var explosions: MutableList<Explosion> = mutableListOf<Explosion>()
     private set
 
   val spaceObjects: List<SpaceObject>
@@ -46,6 +51,10 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
     missiles += createMissile()
   }
 
+  fun generateExplosion(initialPosition: Point2D) {
+    explosions += createExplosion(initialPosition)
+  }
+
   private fun initializeShip(): SpaceShip {
     return SpaceShip(
       initialPosition = standardShipPosition(),
@@ -56,7 +65,7 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
   }
 
   private fun standardShipPosition(): Point2D {
-    return Point2D(x = this.width / 2.0, y = 1.0)
+    return Point2D(x = 0.0, y = 0.0) // Point2D(x = this.width / 2.0, y = 1.0)
   }
 
   private fun standardShipVelocity(): Vector2D {
@@ -69,6 +78,14 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
       initialVelocity = defineMissileVelocity(),
       radius = SpaceFieldConfig.missileRadius,
       mass = SpaceFieldConfig.missileMass,
+    )
+  }
+
+  private fun createExplosion(initialPosition: Point2D): Explosion {
+    return Explosion(
+      initialPosition = initialPosition,
+      radius = SpaceFieldConfig.missileRadius,
+      lifespan = SpaceFieldConfig.explosionLifespan
     )
   }
 
