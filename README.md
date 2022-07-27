@@ -1,6 +1,7 @@
 # Galaxy Raiders
 
 Vitor Daisuke Tamae - 10705620
+
 Giulia Cunha de Nardi - 10692203
 
 Template for the project of the course [MAC0218 - Programming Techniques II][1]
