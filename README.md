@@ -1,5 +1,8 @@
 # Galaxy Raiders
 
+Vitor Daisuke Tamae - 10705620
+Giulia Cunha de Nardi - 10692203
+
 Template for the project of the course [MAC0218 - Programming Techniques II][1]
 at University of São Paulo (@USP).
 
@@ -18,6 +21,14 @@ To develop Galaxy Raiders, please install and use [docker][4].
 Please also install [pre-commit][5] in your development environment to
 automatically format code and to detect bed smells before making new commits.
 By default, this integration also uses [docker][4].
+
+# Adjustments to run the project
+
+The original setup provided didn't properly perform in our machines. So, in order to properly test, we did the following changes:
+
+ - change in inicial position of the spaceship to (0,0), this change was left in comment form in the code
+
+ - web project change in galaxy-raiders-web/pages/index.vue, line 48 from 1000 to 200
 
 ## Linting
 
