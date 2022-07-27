@@ -65,7 +65,10 @@ data class SpaceField(val width: Int, val height: Int, val generator: RandomGene
   }
 
   private fun standardShipPosition(): Point2D {
-    return Point2D(x = 0.0, y = 0.0) // Point2D(x = this.width / 2.0, y = 1.0)
+    return Point2D(x = this.width / 2.0, y = 1.0) 
+    // Spaceship was being instantiated outside the screen boundaries with the Point2D defined above
+    // Therefore, manual tests were made using the initial position Point2D(x = 0.0, y = 0.0)
+    // which instantiates the spaceship in the lower-left corner of the screen
   }
 
   private fun standardShipVelocity(): Vector2D {

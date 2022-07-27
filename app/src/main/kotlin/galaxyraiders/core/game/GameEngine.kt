@@ -61,15 +61,11 @@ class GameEngine(
     this.visualizer.renderSpaceField(this.field)
   }
 
-  fun updateExplosionCounts()
-  {
+  fun updateExplosionCounts() {
     this.field.explosions.forEach {
       it.updateExplosion()
     }
-    list.removeIf { x: T -> predicate.test(x) }
-    
-    var predicate = Predicate { it: it.is_triggered}
-    remove(this.field.explosions,predicate)
+    this.field.explosions.removeIf { it.is_triggered }
   }
 
   fun processPlayerInput() {
